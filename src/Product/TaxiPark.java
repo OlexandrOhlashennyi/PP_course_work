@@ -56,16 +56,17 @@ public class TaxiPark {
         return last_id;
     }
 
-    public void removeCar(int id)
-    {
-        for (int i = 0; i < park.size(); i++)
+    public void removeCar(int id) throws SQLException {
+        Statement stat = con.createStatement();
+        stat.executeUpdate("delete from Cars where ID = " + id);
+        /*for (int i = 0; i < park.size(); i++)
         {
             if (park.get(i).getID() == id)
             {
                 park.remove(i);
                 break;
             }
-        }
+        }*/
     }
 
     public void order(int i, boolean flag)
