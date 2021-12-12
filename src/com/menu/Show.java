@@ -2,6 +2,7 @@ package com.menu;
 
 import Product.TaxiPark;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -15,8 +16,7 @@ public class Show implements MenuCommand{
         this.TP = TP;
     }
 
-    public void execute(List<String> pr)
-    {
+    public void execute(List<String> pr) throws SQLException {
         if (pr.size() == 0)
         {
             TP.printAvailableCars();
