@@ -26,8 +26,18 @@ public class MainMenu extends Application implements EventHandler<ActionEvent> {
 
     @FXML
     Button show_all_btn;
+    @FXML
     Button show_avail_btn;
+    @FXML
     Button show_betw_btn;
+    @FXML
+    TextField lower_te;
+    @FXML
+    TextField upper_te;
+    @FXML
+    RadioButton speed_rbt;
+    @FXML
+    RadioButton price_rbt;
 
     private static TaxiPark TP;
 
@@ -115,7 +125,7 @@ public class MainMenu extends Application implements EventHandler<ActionEvent> {
         {
             MenuCommand mc = menuItems.get("show");
             try {
-                mc.execute(Arrays.asList("--all"));
+                mc.execute(Arrays.asList("all"));
             } catch (InterruptedException | IOException | SQLException e) {
                 e.printStackTrace();
             }
@@ -124,7 +134,7 @@ public class MainMenu extends Application implements EventHandler<ActionEvent> {
         {
             MenuCommand mc = menuItems.get("show");
             try {
-                mc.execute(null);
+                mc.execute(Arrays.asList());
             } catch (InterruptedException | IOException | SQLException e) {
                 e.printStackTrace();
             }
@@ -133,7 +143,12 @@ public class MainMenu extends Application implements EventHandler<ActionEvent> {
         {
             MenuCommand mc = menuItems.get("show");
             try {
-                mc.execute(Arrays.asList("--all"));
+                double lower = Double.parseDouble(lower_te.getText());
+                double upper = Double.parseDouble(upper_te.getText());
+                if (speed_rbt.isSelected())
+                    mc.execute(Arrays.asList("speed", "" + lower, "" + upper));
+                else
+                    mc.execute(Arrays.asList("price", "" + lower, "" + upper));
             } catch (InterruptedException | IOException | SQLException e) {
                 e.printStackTrace();
             }
