@@ -4,6 +4,7 @@ import Product.TaxiPark;
 import com.menu.*;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -36,11 +37,11 @@ public class MainMenu {
         descr.put(Load.NAME, Load.DESCR);
         menuItems.put(Save.NAME, new Save(TP));
         descr.put(Save.NAME, Save.DESCR);
-        menuItems.put(Exit.NAME, new Exit());
+        menuItems.put(Exit.NAME, new Exit(TP));
         descr.put(Exit.NAME, Exit.DESCR);
     }
 
-    public void execute() throws InterruptedException, IOException {
+    public void execute() throws InterruptedException, IOException, SQLException {
         System.out.println("Welcome to TaxiPark organizer!\n" + s);
         while (true)
         {

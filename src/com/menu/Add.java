@@ -6,6 +6,7 @@ import Car.Sport;
 import Car.MiniVan;
 import Product.TaxiPark;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -22,7 +23,7 @@ public class Add implements MenuCommand{
     }
 
     @Override
-    public void execute(List<String> pr) throws InterruptedException {
+    public void execute(List<String> pr) throws InterruptedException, SQLException {
         if (pr.size() != 5)
         {
             System.out.println("Fail...check your command and try again");

@@ -11,10 +11,18 @@ import java.sql.*;
 import java.io.IOException;
 
 public class Main {
-    private static TaxiPark TP = new TaxiPark("TaxiPark1", "+380994130557", "taxipark1@taxi.com");
+    private static TaxiPark TP;
+
+    static {
+        try {
+            TP = new TaxiPark("TaxiPark1", "+380994130557", "taxipark1@taxi.com");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) throws InterruptedException, IOException, SQLException {
-        Connection con = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-VQVGTCO:1433;database=taxipark", "sa", "1234");
+        /*Connection con = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-VQVGTCO:1433;database=taxipark", "sa", "1234");
         Statement stat = con.createStatement();
         stat.executeUpdate("insert into Cars (type, name, price, consumption, max_velocity) values('sedan', 'Model test', 10000, 4.5, 200)");
 
@@ -47,9 +55,9 @@ public class Main {
             System.out.println(sel2.getString("ID") + sel2.getString("type") + sel2.getString("name") + sel2.getString("price"));
         }
 
-        MainMenu mm = new MainMenu(TP);
 
-        con.close();
-        //mm.execute();
+        con.close();*/
+        MainMenu mm = new MainMenu(TP);
+        mm.execute();
     }
 }
