@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+    <children>
+        <AnchorPane prefHeight="608.0" prefWidth="824.0">
+            <children>
+                <Button layoutX="38.0" layoutY="384.0" mnemonicParsing="false" text="show all" />
+                <Button layoutX="38.0" layoutY="425.0" mnemonicParsing="false" text="show available" />
+                <Pane layoutX="38.0" layoutY="461.0" prefHeight="119.0" prefWidth="239.0">
+                    <children>
+                        <RadioButton layoutX="14.0" layoutY="14.0" mnemonicParsing="false" selected="true" text="speed">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="showGP" />
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton layoutX="14.0" layoutY="43.0" mnemonicParsing="false" text="price" toggleGroup="$showGP" />
+                        <TextField layoutX="150.0" layoutY="10.0" prefHeight="10.0" prefWidth="76.0" text="100" />
+                        <TextField layoutX="150.0" layoutY="39.0" prefHeight="10.0" prefWidth="76.0" text="200" />
+                        <Text layoutX="120.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="from" />
+                        <Text layoutX="133.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="to" />
+                        <Button layoutY="80.0" mnemonicParsing="false" text="show between" />
+                    </children>
+                </Pane>
+            </children>
+        </AnchorPane>
+    </children>
+    <columnConstraints>
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+    </rowConstraints>
+</GridPane>

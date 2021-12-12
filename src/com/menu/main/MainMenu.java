@@ -5,16 +5,47 @@ import com.menu.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
-public class MainMenu {
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import javafx.scene.control.*;
+
+public class MainMenu extends Application implements EventHandler<ActionEvent> {
     private LinkedHashMap<String, MenuCommand> menuItems;
     private LinkedHashMap<String, String> descr;
     private  Scanner scanner = new Scanner(System.in);
     private String s;
+
+    Button button;
+
+    private static TaxiPark TP;
+
+    static {
+        try {
+            TP = new TaxiPark("TaxiPark1", "+380994130557", "taxipark1@taxi.com");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public MainMenu() {
+        s = TP.toString();
+        menuItems = new LinkedHashMap<>();
+        descr = new LinkedHashMap<>();
+        menuItems.put(Add.NAME, new Add(TP));
+        menuItems.put(Delete.NAME, new Delete(TP));
+        menuItems.put(Order.NAME, new Order(TP));
+        menuItems.put(Agr.NAME, new Agr(TP));
+        menuItems.put(Show.NAME, new Show(TP));
+        menuItems.put(Exit.NAME, new Exit(TP));
+    }
 
     public MainMenu(TaxiPark TP)
     {
@@ -36,6 +67,7 @@ public class MainMenu {
     }
 
     public void execute() throws InterruptedException, IOException, SQLException {
+        launch();
         System.out.println("Welcome to TaxiPark organizer!\n" + s);
         while (true)
         {
@@ -57,6 +89,28 @@ public class MainMenu {
             else
             {
                 System.out.println("enter correct");
+            }
+        }
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        stage.setTitle("Курсова робота Оглашенного Олександра КН-202");
+        stage.setScene(new Scene(root, 800, 600));
+        stage.show();
+    }
+
+    @Override
+    public void handle(ActionEvent actionEvent) {
+        if (actionEvent.getSource() == button)
+        {
+            System.out.println("pressed");
+            MenuCommand mc = menuItems.get("show");
+            try {
+                mc.execute(Arrays.asList("--all"));
+            } catch (InterruptedException | IOException | SQLException e) {
+                e.printStackTrace();
             }
         }
     }
