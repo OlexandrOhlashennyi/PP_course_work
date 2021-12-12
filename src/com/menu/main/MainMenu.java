@@ -29,14 +29,8 @@ public class MainMenu {
         descr.put(Order.NAME, Order.DESCR);
         menuItems.put(Agr.NAME, new Agr(TP));
         descr.put(Agr.NAME, Agr.DESCR);
-        menuItems.put(Sort.NAME, new Sort(TP));
-        descr.put(Sort.NAME, Sort.DESCR);
         menuItems.put(Show.NAME, new Show(TP));
         descr.put(Show.NAME, Show.DESCR);
-        menuItems.put(Load.NAME, new Load(TP));
-        descr.put(Load.NAME, Load.DESCR);
-        menuItems.put(Save.NAME, new Save(TP));
-        descr.put(Save.NAME, Save.DESCR);
         menuItems.put(Exit.NAME, new Exit(TP));
         descr.put(Exit.NAME, Exit.DESCR);
     }

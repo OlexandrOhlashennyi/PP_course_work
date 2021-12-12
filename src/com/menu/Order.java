@@ -2,6 +2,7 @@ package com.menu;
 
 import Product.TaxiPark;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -15,7 +16,7 @@ public class Order implements MenuCommand {
     }
 
     @Override
-    public void execute(List<String> pr) throws InterruptedException {
+    public void execute(List<String> pr) throws InterruptedException, SQLException {
         if (pr.size() == 4 && "price".equals(pr.get(0))) {
             double length = Double.parseDouble(pr.get(2));
             int m;
