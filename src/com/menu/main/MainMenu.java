@@ -10,6 +10,7 @@ import java.util.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,7 +24,10 @@ public class MainMenu extends Application implements EventHandler<ActionEvent> {
     private  Scanner scanner = new Scanner(System.in);
     private String s;
 
-    Button button;
+    @FXML
+    Button show_all_btn;
+    Button show_avail_btn;
+    Button show_betw_btn;
 
     private static TaxiPark TP;
 
@@ -101,11 +105,32 @@ public class MainMenu extends Application implements EventHandler<ActionEvent> {
         stage.show();
     }
 
-    @Override
+    @FXML
     public void handle(ActionEvent actionEvent) {
-        if (actionEvent.getSource() == button)
+
+    }
+
+    public void click(ActionEvent actionEvent) {
+        if (actionEvent.getSource() == show_all_btn)
         {
-            System.out.println("pressed");
+            MenuCommand mc = menuItems.get("show");
+            try {
+                mc.execute(Arrays.asList("--all"));
+            } catch (InterruptedException | IOException | SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (actionEvent.getSource() == show_avail_btn)
+        {
+            MenuCommand mc = menuItems.get("show");
+            try {
+                mc.execute(null);
+            } catch (InterruptedException | IOException | SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (actionEvent.getSource() == show_betw_btn)
+        {
             MenuCommand mc = menuItems.get("show");
             try {
                 mc.execute(Arrays.asList("--all"));
