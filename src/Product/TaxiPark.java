@@ -5,25 +5,15 @@ import Car.Sedan;
 import Car.Sport;
 import Car.MiniVan;
 
-import javax.swing.plaf.nimbus.State;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.*;
-import java.util.*;
 
 public class TaxiPark {
-    static FileWriter file_write;
-    static File file_read;
-
     private String name;
     private String phone;
     private String email;
     private int last_id = 100;
 
     private Connection con;
-    private ArrayList<Car> park = new ArrayList<Car>();
 
     public TaxiPark() throws SQLException {
          con = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-VQVGTCO:1433;database=taxipark", "sa", "1234");
@@ -49,7 +39,6 @@ public class TaxiPark {
 
         stat.executeUpdate();
 
-        park.add(c);
         last_id = c.getID();
     }
 
@@ -65,7 +54,7 @@ public class TaxiPark {
     public void order(int i, boolean flag) throws SQLException {
         PreparedStatement stat = con.prepareStatement("update Cars set busy = ? " +
                 " where ID = ?");
-        stat.setBoolean(1, true);
+        stat.setBoolean(1, flag);
         stat.setInt(2, i);
         stat.executeUpdate();
     }
@@ -111,11 +100,6 @@ public class TaxiPark {
             }
         }
         return 0;
-    }
-    
-    public void reverse()
-    {
-        Collections.reverse(park);
     }
 
     public void printAvailableCars() throws SQLException {
