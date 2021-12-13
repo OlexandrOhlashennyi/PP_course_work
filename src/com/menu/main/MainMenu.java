@@ -8,6 +8,7 @@ import Product.TaxiPark;
 import com.menu.*;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -63,15 +64,12 @@ public class MainMenu extends Application implements EventHandler<ActionEvent> {
 
     private static TaxiPark TP;
 
-    static {
+    public MainMenu() {
         try {
             TP = new TaxiPark("TaxiPark1", "+380994130557", "taxipark1@taxi.com");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-    }
-
-    public MainMenu() {
         s = TP.toString();
         menuItems = new LinkedHashMap<>();
         descr = new LinkedHashMap<>();
@@ -123,28 +121,53 @@ public class MainMenu extends Application implements EventHandler<ActionEvent> {
     public void initialize()
     {
         cars_table.getColumns().addAll(id,type,name,price,consumption,max_velocity);
+        id.setCellValueFactory(new PropertyValueFactory<Car, String>("ID"));
+        type.setCellValueFactory(new PropertyValueFactory<Car, String>("type"));
+        name.setCellValueFactory(new PropertyValueFactory<Car, String>("model"));
+        price.setCellValueFactory(new PropertyValueFactory<Car, String>("price"));
+        consumption.setCellValueFactory(new PropertyValueFactory<Car, String>("consumption"));
+        max_velocity.setCellValueFactory(new PropertyValueFactory<Car, String>("max_velocity"));
+    }
+
+    private void printTV(ResultSet rs) throws SQLException {
+        Car c = null;
+        cardata.clear();
+        while (rs.next())
+        {
+            if (rs.getString("type").contains("sport")) {
+                c = new Sport(rs.getString("name"),
+                        rs.getFloat("price"),
+                        rs.getFloat("consumption"),
+                        rs.getFloat("max_velocity"),
+                        rs.getInt("ID"));
+            }
+            else if (rs.getString("type").contains("minivan")) {
+                c = new MiniVan(rs.getString("name"),
+                        rs.getFloat("price"),
+                        rs.getFloat("consumption"),
+                        rs.getFloat("max_velocity"),
+                        rs.getInt("ID"));
+            }
+            else {
+                c = new Sedan(rs.getString("name"),
+                        rs.getFloat("price"),
+                        rs.getFloat("consumption"),
+                        rs.getFloat("max_velocity"),
+                        rs.getInt("ID"));
+            }
+            cardata.add(c);
+        }
+        cars_table.setItems(cardata);
     }
 
     public void click(ActionEvent actionEvent) {
         if (actionEvent.getSource() == show_all_btn)
         {
-            cardata.add(new MiniVan("Citroen Xsara MPI 2008", 7800, 4.3, 175, 101));
-            cardata.add(new Sedan("Toyota Corolla 2017", 11500, 4.9, 190, 103));
-            cardata.add(new Sedan("Shkoda superb 2010", 11000, 5.5, 160, 104));
-            cardata.add(new Sedan("Volvo S40 Kinetic 2011", 8950, 4.5, 190, 105));
-
-            id.setCellValueFactory(new PropertyValueFactory<Car, String>("id"));
-            type.setCellValueFactory(new PropertyValueFactory<Car, String>("type"));
-            name.setCellValueFactory(new PropertyValueFactory<Car, String>("name"));
-            price.setCellValueFactory(new PropertyValueFactory<Car, String>("price"));
-            consumption.setCellValueFactory(new PropertyValueFactory<Car, String>("consumption"));
-            max_velocity.setCellValueFactory(new PropertyValueFactory<Car, String>("max_velocity"));
-
-            cars_table.setItems(cardata);
-
             MenuCommand mc = menuItems.get("show");
             try {
-                mc.execute(Arrays.asList("all"));
+                ResultSet rs;
+                rs = mc.execute(Arrays.asList("all"));
+                printTV(rs);
             } catch (InterruptedException | IOException | SQLException e) {
                 e.printStackTrace();
             }
@@ -153,7 +176,9 @@ public class MainMenu extends Application implements EventHandler<ActionEvent> {
         {
             MenuCommand mc = menuItems.get("show");
             try {
-                mc.execute(Arrays.asList());
+                ResultSet rs;
+                rs = mc.execute(Arrays.asList());
+                printTV(rs);
             } catch (InterruptedException | IOException | SQLException e) {
                 e.printStackTrace();
             }
@@ -162,12 +187,14 @@ public class MainMenu extends Application implements EventHandler<ActionEvent> {
         {
             MenuCommand mc = menuItems.get("show");
             try {
+                ResultSet rs;
                 double lower = Double.parseDouble(lower_te.getText());
                 double upper = Double.parseDouble(upper_te.getText());
                 if (speed_rbt.isSelected())
-                    mc.execute(Arrays.asList("speed", "" + lower, "" + upper));
+                    rs = mc.execute(Arrays.asList("speed", "" + lower, "" + upper));
                 else
-                    mc.execute(Arrays.asList("price", "" + lower, "" + upper));
+                    rs = mc.execute(Arrays.asList("price", "" + lower, "" + upper));
+                printTV(rs);
             } catch (InterruptedException | IOException | SQLException e) {
                 e.printStackTrace();
             }

@@ -6,6 +6,7 @@ import Car.Sport;
 import Car.MiniVan;
 import Product.TaxiPark;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Locale;
@@ -23,11 +24,11 @@ public class Add implements MenuCommand{
     }
 
     @Override
-    public void execute(List<String> pr) throws InterruptedException, SQLException {
+    public ResultSet execute(List<String> pr) throws InterruptedException, SQLException {
         if (pr.size() != 5)
         {
             System.out.println("Fail...check your command and try again");
-            return;
+            return null;
         }
 
         System.out.print("ading");
@@ -48,9 +49,10 @@ public class Add implements MenuCommand{
                 break;
             default:
                 System.out.println("Fail...check your command and try again");
-                return;
+                return null;
         }
         TP.addCar(a);
         System.out.println("Done");
+        return null;
     }
 }

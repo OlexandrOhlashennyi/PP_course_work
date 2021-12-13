@@ -2,6 +2,7 @@ package com.menu;
 
 import Product.TaxiPark;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -17,7 +18,7 @@ public class Exit implements MenuCommand {
     }
 
     @Override
-    public void execute(List<String> pr) throws InterruptedException, SQLException {
+    public ResultSet execute(List<String> pr) throws InterruptedException, SQLException {
         System.out.print("exiting");
         TP.exit();
         for (int i = 0; i < 4; i++)
@@ -27,5 +28,6 @@ public class Exit implements MenuCommand {
         }
         System.out.println("Have a nice day! Bye!");
         System.exit(0);
+        return null;
     }
 }

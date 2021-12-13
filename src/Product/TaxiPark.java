@@ -20,7 +20,6 @@ public class TaxiPark {
     private Connection con;
 
     public TaxiPark() throws SQLException {
-
         con = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-VQVGTCO:1433;database=taxipark", "sa", "1234");
     }
 
@@ -107,66 +106,72 @@ public class TaxiPark {
         return 0;
     }
 
-    public void printAvailableCars() throws SQLException {
+    public ResultSet printAvailableCars() throws SQLException {
         PreparedStatement stat = con.prepareStatement("SELECT * \n" +
                 "  FROM [taxipark].[dbo].[Cars]\n" +
                 "where busy = ?");
         stat.setBoolean(1, false);
-        ResultSet sel = stat.executeQuery();
-
-        printRS(sel);
+        return stat.executeQuery();
     }
 
-    public void printCarsWithSpeed(double min, double max) throws SQLException {
+    public ResultSet printCarsWithSpeed(double min, double max) throws SQLException {
         PreparedStatement stat = con.prepareStatement("SELECT * \n" +
                 "  FROM [taxipark].[dbo].[Cars]\n" +
                 "where max_velocity > ? and max_velocity < ?");
         stat.setFloat(1, (float) min);
         stat.setFloat(2, (float) max);
-        ResultSet sel = stat.executeQuery();
-
-        printRS(sel);
+        return stat.executeQuery();
     }
 
-    public void printCarsWithPrice(double min, double max) throws SQLException {
+    public ResultSet printCarsWithPrice(double min, double max) throws SQLException {
         PreparedStatement stat = con.prepareStatement("SELECT * \n" +
                 "  FROM [taxipark].[dbo].[Cars]\n" +
                 "where price > ? and price < ?");
         stat.setFloat(1, (float) min);
         stat.setFloat(2, (float) max);
-        ResultSet sel = stat.executeQuery();
-
-        printRS(sel);
+        return stat.executeQuery();
     }
 
-    public void printCarsWithConsum(double min, double max) throws SQLException {
+    public ResultSet printCarsWithConsum(double min, double max) throws SQLException {
         PreparedStatement stat = con.prepareStatement("SELECT * \n" +
                 "  FROM [taxipark].[dbo].[Cars]\n" +
                 "where consumption > ? and consumption < ?");
         stat.setFloat(1, (float) min);
         stat.setFloat(2, (float) max);
-        ResultSet sel = stat.executeQuery();
-
-        printRS(sel);
+        return stat.executeQuery();
     }
 
-    public void printAllCars() throws SQLException {
+    public ResultSet printAllCars() throws SQLException {
         Statement stat = con.createStatement();
-        ResultSet sel = stat.executeQuery("SELECT * \n" +
+        return stat.executeQuery("SELECT * \n" +
                 "  FROM [taxipark].[dbo].[Cars]");
-
-        printRS(sel);
     }
 
-    private void printRS(ResultSet sel) throws SQLException {
-
-        while (sel.next())
+    private void printRS(ResultSet rs) throws SQLException {
+        Car c = null;
+        while (rs.next())
         {
-            System.out.println(sel.getString("ID") +
-                    " " + sel.getString("type") +
-                    sel.getString("name") +
-                    sel.getString("price") +
-                    " " + sel.getString("busy"));
+            if (rs.getString("type").contains("sport")) {
+                c = new Sport(rs.getString("name"),
+                        rs.getFloat("price"),
+                        rs.getFloat("consumption"),
+                        rs.getFloat("max_velocity"),
+                        rs.getInt("ID"));
+            }
+            else if (rs.getString("type").contains("minivan")) {
+                c = new MiniVan(rs.getString("name"),
+                        rs.getFloat("price"),
+                        rs.getFloat("consumption"),
+                        rs.getFloat("max_velocity"),
+                        rs.getInt("ID"));
+            }
+            else if (rs.getString("type").contains("sedan")) {
+                c = new Sedan(rs.getString("name"),
+                        rs.getFloat("price"),
+                        rs.getFloat("consumption"),
+                        rs.getFloat("max_velocity"),
+                        rs.getInt("ID"));
+            }
         }
     }
 
