@@ -2,6 +2,7 @@ package com.menu;
 
 import Product.TaxiPark;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -17,7 +18,7 @@ public class Delete implements MenuCommand{
     }
 
     @Override
-    public void execute(List<String> pr) throws InterruptedException, SQLException {
+    public ResultSet execute(List<String> pr) throws InterruptedException, SQLException {
         TP.removeCar(Integer.parseInt(pr.get(0)));
 
         System.out.print("deleting");
@@ -27,5 +28,6 @@ public class Delete implements MenuCommand{
             System.out.print(".");
         }
         System.out.println("Done");
+        return null;
     }
 }

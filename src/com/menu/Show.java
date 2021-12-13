@@ -2,6 +2,7 @@ package com.menu;
 
 import Product.TaxiPark;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -16,30 +17,30 @@ public class Show implements MenuCommand{
         this.TP = TP;
     }
 
-    public void execute(List<String> pr) throws SQLException {
+    public ResultSet execute(List<String> pr) throws SQLException {
         if (pr.size() == 0)
         {
-            TP.printAvailableCars();
+            return TP.printAvailableCars();
         }
         else if ("all".equals(pr.get(0)))
         {
-            TP.printAllCars();
+            return TP.printAllCars();
         }
         else if ("speed".equals(pr.get(0)) && pr.size() == 3)
         {
-            TP.printCarsWithSpeed(Double.parseDouble(pr.get(1)), Double.parseDouble(pr.get(2)));
+            return TP.printCarsWithSpeed(Double.parseDouble(pr.get(1)), Double.parseDouble(pr.get(2)));
         }
         else if ("price".equals(pr.get(0)) && pr.size() == 3)
         {
-            TP.printCarsWithPrice(Double.parseDouble(pr.get(1)), Double.parseDouble(pr.get(2)));
+            return TP.printCarsWithPrice(Double.parseDouble(pr.get(1)), Double.parseDouble(pr.get(2)));
         }
         else if ("consumption".equals(pr.get(0)) && pr.size() == 3)
         {
-            TP.printCarsWithConsum(Double.parseDouble(pr.get(1)), Double.parseDouble(pr.get(2)));
+            return TP.printCarsWithConsum(Double.parseDouble(pr.get(1)), Double.parseDouble(pr.get(2)));
         }
         else
         {
-            TP.printAvailableCars();
+            return TP.printAvailableCars();
         }
     }
 }

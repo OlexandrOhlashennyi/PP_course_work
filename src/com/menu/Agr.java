@@ -2,6 +2,7 @@ package com.menu;
 
 import Product.TaxiPark;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -17,7 +18,8 @@ public class Agr implements MenuCommand{
     }
 
     @Override
-    public void execute(List<String> pr) throws InterruptedException, SQLException {
+    public ResultSet execute(List<String> pr) throws InterruptedException, SQLException {
         System.out.println("Total cost of TaxiPark: " + TP.sum() + "$");
+        return null;
     }
 }
