@@ -4,10 +4,6 @@ import Car.Car;
 import Car.Sedan;
 import Car.Sport;
 import Car.MiniVan;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 
 import java.sql.*;
 

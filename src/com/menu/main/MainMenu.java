@@ -22,15 +22,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
+import javafx.scene.text.*;
 
 public class MainMenu extends Application implements EventHandler<ActionEvent> {
     private LinkedHashMap<String, MenuCommand> menuItems;
     private LinkedHashMap<String, String> descr;
     private  Scanner scanner = new Scanner(System.in);
     private String s;
+    static Stage main_stage;
+    static Parent root = null;
+    static Parent adding_sc = null;
+    static Scene main_scene;
+    static Scene addition_scene;
 
     TableColumn id = new TableColumn("ID");
     TableColumn type = new TableColumn("type");
@@ -55,6 +62,30 @@ public class MainMenu extends Application implements EventHandler<ActionEvent> {
     RadioButton price_rbt;
     @FXML
     TableView cars_table;
+    @FXML
+    Text price_txt;
+    @FXML
+    Button add_btn;
+    @FXML
+    Button add_conf_btn;
+    @FXML
+    RadioButton type_sedan_rb;
+    @FXML
+    RadioButton type_sp_rb;
+    @FXML
+    RadioButton type_mv_rb;
+    @FXML
+    TextField add_model_txt;
+    @FXML
+    TextField add_price_txt;
+    @FXML
+    TextField add_cons_txt;
+    @FXML
+    TextField add_ms_txt;
+    @FXML
+    Button delete_btn;
+    @FXML
+    TextField delete_id_txt;
 
     private ObservableList<Car> cardata = FXCollections.observableArrayList();
 
@@ -106,10 +137,14 @@ public class MainMenu extends Application implements EventHandler<ActionEvent> {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        stage.setTitle("Курсова робота Оглашенного Олександра КН-202");
-        stage.setScene(new Scene(root, 1000, 800));
-        stage.show();
+        main_stage = stage;
+        root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        adding_sc = FXMLLoader.load(MainMenu.class.getResource("adding.fxml"));
+        main_scene = new Scene(root, 1000, 800);
+        addition_scene = new Scene(adding_sc, 1000, 800);
+        main_stage.setTitle("Курсова робота Оглашенного Олександра КН-202");
+        main_stage.setScene(main_scene);
+        main_stage.show();
     }
 
     @FXML
@@ -119,6 +154,14 @@ public class MainMenu extends Application implements EventHandler<ActionEvent> {
 
     @FXML
     public void initialize()
+    {
+        if (root == null)
+        {
+            add_table();
+        }
+    }
+
+    private void add_table()
     {
         cars_table.getColumns().addAll(id,type,name,price,consumption,max_velocity);
         id.setCellValueFactory(new PropertyValueFactory<Car, String>("ID"));
@@ -158,9 +201,10 @@ public class MainMenu extends Application implements EventHandler<ActionEvent> {
             cardata.add(c);
         }
         cars_table.setItems(cardata);
+        price_txt.setText("" + TP.sum());
     }
 
-    public void click(ActionEvent actionEvent) {
+    public void click(ActionEvent actionEvent) throws IOException, SQLException {
         if (actionEvent.getSource() == show_all_btn)
         {
             MenuCommand mc = menuItems.get("show");
@@ -198,6 +242,46 @@ public class MainMenu extends Application implements EventHandler<ActionEvent> {
             } catch (InterruptedException | IOException | SQLException e) {
                 e.printStackTrace();
             }
+        }
+        if (actionEvent.getSource() == add_btn)
+        {
+            main_stage.setScene(addition_scene);
+            main_stage.show();
+        }
+        if (actionEvent.getSource() == delete_btn)
+        {
+            TP.removeCar(Integer.parseInt(delete_id_txt.getText()));
+        }
+        if (actionEvent.getSource() == add_conf_btn)
+        {
+            Car c = null;
+
+            if (type_sp_rb.isSelected()) {
+                c = new Sport(add_model_txt.getText(),
+                        Double.parseDouble(add_price_txt.getText()),
+                        Double.parseDouble(add_cons_txt.getText()),
+                        Double.parseDouble(add_ms_txt.getText()),
+                        0);
+            }
+            else if (type_mv_rb.isSelected()) {
+                c = new MiniVan(add_model_txt.getText(),
+                        Double.parseDouble(add_price_txt.getText()),
+                        Double.parseDouble(add_cons_txt.getText()),
+                        Double.parseDouble(add_ms_txt.getText()),
+                        0);
+            }
+            else {
+                c = new Sedan(add_model_txt.getText(),
+                        Double.parseDouble(add_price_txt.getText()),
+                        Double.parseDouble(add_cons_txt.getText()),
+                        Double.parseDouble(add_ms_txt.getText()),
+                        0);
+            }
+
+            TP.addCar(c);
+
+            main_stage.setScene(main_scene);
+            main_stage.show();
         }
     }
 }

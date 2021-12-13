@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane minHeight="800.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.menu.main.MainMenu">
+   <children>
+      <TextField fx:id="add_model_txt" layoutX="153.0" layoutY="152.0" prefHeight="62.0" prefWidth="796.0" text="Model name" />
+      <TextField fx:id="add_cons_txt" layoutX="153.0" layoutY="375.0" prefHeight="25.0" prefWidth="796.0" text="4.5" />
+      <TextField fx:id="add_price_txt" layoutX="155.0" layoutY="277.0" prefHeight="25.0" prefWidth="796.0" text="10000" />
+      <TextField fx:id="add_ms_txt" layoutX="153.0" layoutY="476.0" prefHeight="25.0" prefWidth="796.0" text="200" />
+      <Text layoutX="106.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="model" />
+      <Text layoutX="112.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price" />
+      <Text layoutX="71.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" text="consumption" />
+      <Text layoutX="83.0" layoutY="489.0" strokeType="OUTSIDE" strokeWidth="0.0" text="max speed" />
+      <Text layoutX="71.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter info" wrappingWidth="306.13671875">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <Button fx:id="add_conf_btn" layoutX="138.0" layoutY="674.0" mnemonicParsing="false" onAction="#click" prefHeight="62.0" prefWidth="148.0" text="Add" />
+      <Pane layoutX="138.0" layoutY="539.0" prefHeight="91.0" prefWidth="285.0">
+         <children>
+            <RadioButton fx:id="type_sedan_rb" layoutX="23.0" layoutY="23.0" mnemonicParsing="false" selected="true" text="Sedan">
+               <toggleGroup>
+                  <ToggleGroup fx:id="type_ch" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="type_mv_rb" layoutX="23.0" layoutY="53.0" mnemonicParsing="false" text="MiniVan" toggleGroup="$type_ch" />
+            <RadioButton fx:id="type_sp_rb" layoutX="143.0" layoutY="23.0" mnemonicParsing="false" text="SportCar" toggleGroup="$type_ch" />
+         </children>
+      </Pane>
+      <Text layoutX="95.0" layoutY="569.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" />
+   </children>
+</AnchorPane>
