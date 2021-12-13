@@ -4,6 +4,10 @@ import Car.Car;
 import Car.Sedan;
 import Car.Sport;
 import Car.MiniVan;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 import java.sql.*;
 
@@ -16,7 +20,8 @@ public class TaxiPark {
     private Connection con;
 
     public TaxiPark() throws SQLException {
-         con = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-VQVGTCO:1433;database=taxipark", "sa", "1234");
+
+        con = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-VQVGTCO:1433;database=taxipark", "sa", "1234");
     }
 
     public TaxiPark(String name, String phone, String email) throws SQLException {
@@ -154,6 +159,7 @@ public class TaxiPark {
     }
 
     private void printRS(ResultSet sel) throws SQLException {
+
         while (sel.next())
         {
             System.out.println(sel.getString("ID") +

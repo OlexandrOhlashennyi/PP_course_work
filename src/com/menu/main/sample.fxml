@@ -2,43 +2,32 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.menu.main.MainMenu">
-    <children>
-        <AnchorPane prefHeight="608.0" prefWidth="824.0">
-            <children>
-                <Button fx:id="show_all_btn" layoutX="38.0" layoutY="384.0" mnemonicParsing="false" onAction="#click" text="show all" />
-                <Button fx:id="show_avail_btn" layoutX="38.0" layoutY="425.0" mnemonicParsing="false" onAction="#click" text="show available" />
-                <Pane layoutX="38.0" layoutY="461.0" prefHeight="119.0" prefWidth="239.0">
-                    <children>
-                        <RadioButton fx:id="speed_rbt" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" selected="true" text="speed">
-                            <toggleGroup>
-                                <ToggleGroup fx:id="showGP" />
-                            </toggleGroup>
-                        </RadioButton>
-                        <RadioButton fx:id="price_rbt" layoutX="14.0" layoutY="43.0" mnemonicParsing="false" text="price" toggleGroup="$showGP" />
-                        <TextField fx:id="lower_te" layoutX="150.0" layoutY="10.0" prefHeight="10.0" prefWidth="76.0" text="100" />
-                        <TextField fx:id="upper_te" layoutX="150.0" layoutY="39.0" prefHeight="10.0" prefWidth="76.0" text="200" />
-                        <Text layoutX="120.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="from" />
-                        <Text layoutX="133.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="to" />
-                        <Button fx:id="show_betw_btn" layoutY="80.0" mnemonicParsing="false" onAction="#click" text="show between" />
-                    </children>
-                </Pane>
-            </children>
-        </AnchorPane>
-    </children>
-    <columnConstraints>
-        <ColumnConstraints />
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints />
-    </rowConstraints>
-</GridPane>
+<AnchorPane minHeight="800.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.menu.main.MainMenu">
+   <children>
+      <TableView fx:id="cars_table" layoutX="38.0" layoutY="41.0" prefHeight="359.0" prefWidth="925.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0" />
+      <Button fx:id="show_all_btn" layoutX="38.0" layoutY="557.0" mnemonicParsing="false" onAction="#click" text="show all" AnchorPane.bottomAnchor="222.0" />
+      <Button fx:id="show_avail_btn" layoutX="38.0" layoutY="608.0" mnemonicParsing="false" onAction="#click" text="show available" AnchorPane.bottomAnchor="171.0" />
+      <Pane layoutX="38.0" layoutY="654.0" prefHeight="119.0" prefWidth="239.0" AnchorPane.bottomAnchor="31.0">
+         <children>
+            <RadioButton fx:id="speed_rbt" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" selected="true" text="speed">
+               <toggleGroup>
+                  <ToggleGroup fx:id="showGP" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="price_rbt" layoutX="14.0" layoutY="43.0" mnemonicParsing="false" text="price" toggleGroup="$showGP" />
+            <TextField fx:id="lower_te" layoutX="150.0" layoutY="10.0" prefHeight="10.0" prefWidth="76.0" text="100" />
+            <TextField fx:id="upper_te" layoutX="150.0" layoutY="39.0" prefHeight="10.0" prefWidth="76.0" text="200" />
+            <Text layoutX="120.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="from" />
+            <Text layoutX="133.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="to" />
+            <Button fx:id="show_betw_btn" layoutY="80.0" mnemonicParsing="false" onAction="#click" text="show between" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
