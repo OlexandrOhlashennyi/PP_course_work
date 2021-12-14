@@ -37,5 +37,6 @@
          </children>
       </Pane>
       <Text layoutX="95.0" layoutY="569.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" />
+      <Button fx:id="cancel_btn" layoutX="377.0" layoutY="696.0" mnemonicParsing="false" onAction="#click" prefHeight="40.0" prefWidth="104.0" text="Cancel" />
    </children>
 </AnchorPane>

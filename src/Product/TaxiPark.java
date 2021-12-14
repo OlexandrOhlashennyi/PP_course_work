@@ -67,6 +67,19 @@ public class TaxiPark {
         return 0;
     }
 
+    public String getType(int ID) throws SQLException {
+        PreparedStatement stat = con.prepareStatement("select top(1) type from Cars " +
+                " where ID = ?");
+        stat.setInt(1, ID);
+        ResultSet rs = stat.executeQuery();
+
+        if (rs.next())
+        {
+            return rs.getString("type");
+        }
+        return "";
+    }
+
     public double cost(int i, double length, int mode) throws SQLException {
         PreparedStatement stat = con.prepareStatement("select * from Cars where ID = ?");
         stat.setInt(1, i);
@@ -79,7 +92,8 @@ public class TaxiPark {
                         rs.getFloat("price"),
                         rs.getFloat("consumption"),
                         rs.getFloat("max_velocity"),
-                        rs.getInt("ID"));
+                        rs.getInt("ID"),
+                        rs.getBoolean("busy"));
                 return c.cost(length,mode);
             }
             else if (rs.getString("type").contains("minivan")) {
@@ -87,7 +101,8 @@ public class TaxiPark {
                         rs.getFloat("price"),
                         rs.getFloat("consumption"),
                         rs.getFloat("max_velocity"),
-                        rs.getInt("ID"));
+                        rs.getInt("ID"),
+                        rs.getBoolean("busy"));
                 return c.cost(length,mode);
             }
             else if (rs.getString("type").contains("sedan")) {
@@ -95,7 +110,8 @@ public class TaxiPark {
                         rs.getFloat("price"),
                         rs.getFloat("consumption"),
                         rs.getFloat("max_velocity"),
-                        rs.getInt("ID"));
+                        rs.getInt("ID"),
+                        rs.getBoolean("busy"));
                 return c.cost(length,mode);
             }
         }
@@ -152,21 +168,24 @@ public class TaxiPark {
                         rs.getFloat("price"),
                         rs.getFloat("consumption"),
                         rs.getFloat("max_velocity"),
-                        rs.getInt("ID"));
+                        rs.getInt("ID"),
+                        rs.getBoolean("busy"));
             }
             else if (rs.getString("type").contains("minivan")) {
                 c = new MiniVan(rs.getString("name"),
                         rs.getFloat("price"),
                         rs.getFloat("consumption"),
                         rs.getFloat("max_velocity"),
-                        rs.getInt("ID"));
+                        rs.getInt("ID"),
+                        rs.getBoolean("busy"));
             }
             else if (rs.getString("type").contains("sedan")) {
                 c = new Sedan(rs.getString("name"),
                         rs.getFloat("price"),
                         rs.getFloat("consumption"),
                         rs.getFloat("max_velocity"),
-                        rs.getInt("ID"));
+                        rs.getInt("ID"),
+                        rs.getBoolean("busy"));
             }
         }
     }

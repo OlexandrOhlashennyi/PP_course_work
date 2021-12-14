@@ -36,23 +36,12 @@ public class Order implements MenuCommand {
                     m = 1;
                     break;
             }
-            System.out.println("Order this car for drive " + length + "km in " + mode + " mode, will cost: " + TP.cost(Integer.parseInt(pr.get(1)), length, m) + "UAH");
         } else
         {
-            System.out.print("processing");
-            for (int i = 0; i < 4; i++)
-            {
-                TimeUnit.MILLISECONDS.sleep(250);
-                System.out.print(".");
-            }
             if (pr.size() > 1 && "order".equals(pr.get(0))) {
                 TP.order(Integer.parseInt(pr.get(1)), true);
-                System.out.print("Done");
             } else if (pr.size() > 1 && "unorder".equals(pr.get(0))) {
                 TP.order(Integer.parseInt(pr.get(1)), false);
-                System.out.print("Done");
-            } else {
-                System.out.print("Fail...check your command");
             }
         }
         return null;
