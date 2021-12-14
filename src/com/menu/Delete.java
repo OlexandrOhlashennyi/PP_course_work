@@ -20,14 +20,6 @@ public class Delete implements MenuCommand{
     @Override
     public ResultSet execute(List<String> pr) throws InterruptedException, SQLException {
         TP.removeCar(Integer.parseInt(pr.get(0)));
-
-        System.out.print("deleting");
-        for (int i = 0; i < 4; i++)
-        {
-            TimeUnit.MILLISECONDS.sleep(250);
-            System.out.print(".");
-        }
-        System.out.println("Done");
         return null;
     }
 }

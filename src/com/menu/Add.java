@@ -27,32 +27,24 @@ public class Add implements MenuCommand{
     public ResultSet execute(List<String> pr) throws InterruptedException, SQLException {
         if (pr.size() != 5)
         {
-            System.out.println("Fail...check your command and try again");
             return null;
-        }
-
-        System.out.print("ading");
-        for (int i = 0; i < 4; i++) {
-            TimeUnit.MILLISECONDS.sleep(250);
-            System.out.print(".");
         }
         Car a = null;
         switch (pr.get(0).toLowerCase(Locale.ROOT)) {
             case "sport":
-                a = new Sport(pr.get(1), Double.parseDouble(pr.get(2)), Double.parseDouble(pr.get(3)), Double.parseDouble(pr.get(4)), TP.getLast_id() + 1);
+                a = new Sport(pr.get(1), Double.parseDouble(pr.get(2)), Double.parseDouble(pr.get(3)), Double.parseDouble(pr.get(4)), TP.getLast_id() + 1, false);
                 break;
             case "sedan":
-                a = new Sedan(pr.get(1), Double.parseDouble(pr.get(2)), Double.parseDouble(pr.get(3)), Double.parseDouble(pr.get(4)), TP.getLast_id() + 1);
+                a = new Sedan(pr.get(1), Double.parseDouble(pr.get(2)), Double.parseDouble(pr.get(3)), Double.parseDouble(pr.get(4)), TP.getLast_id() + 1, false);
                 break;
             case "minivan":
-                a = new MiniVan(pr.get(1), Double.parseDouble(pr.get(2)), Double.parseDouble(pr.get(3)), Double.parseDouble(pr.get(4)), TP.getLast_id() + 1);
+                a = new MiniVan(pr.get(1), Double.parseDouble(pr.get(2)), Double.parseDouble(pr.get(3)), Double.parseDouble(pr.get(4)), TP.getLast_id() + 1, false);
                 break;
             default:
-                System.out.println("Fail...check your command and try again");
                 return null;
         }
         TP.addCar(a);
-        System.out.println("Done");
+
         return null;
     }
 }

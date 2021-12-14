@@ -11,13 +11,13 @@ public abstract class Car {
     protected double max_velocity;
     protected boolean busy;
 
-    public Car(String model, double price, double consumption, double max_velocity, int ID) {
+    public Car(String model, double price, double consumption, double max_velocity, int ID, boolean b) {
         this.model = model;
         this.price = price;
         this.consumption = consumption;
         this.max_velocity = max_velocity;
         this.ID = ID;
-        this.busy = false;
+        this.busy = b;
     }
 
     protected Car() {

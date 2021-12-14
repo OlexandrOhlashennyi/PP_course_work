@@ -1,8 +1,8 @@
 package Car;
 
 public class Sport extends Car{
-    public Sport(String model, double price, double consumption, double max_velocity, int ID) {
-        super(model, price, consumption, max_velocity, ID);
+    public Sport(String model, double price, double consumption, double max_velocity, int ID, boolean b) {
+        super(model, price, consumption, max_velocity, ID, b);
         this.passengers = 2;
         this.driver_price = 20;
         this.fuel_price = 35;

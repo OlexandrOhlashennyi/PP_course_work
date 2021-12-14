@@ -19,14 +19,8 @@ public class Exit implements MenuCommand {
 
     @Override
     public ResultSet execute(List<String> pr) throws InterruptedException, SQLException {
-        System.out.print("exiting");
         TP.exit();
-        for (int i = 0; i < 4; i++)
-        {
-            TimeUnit.MILLISECONDS.sleep(250);
-            System.out.print(".");
-        }
-        System.out.println("Have a nice day! Bye!");
+
         System.exit(0);
         return null;
     }

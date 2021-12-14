@@ -1,8 +1,8 @@
 package Car;
 
 public class MiniVan extends Car{
-    public MiniVan(String model, double price, double consumption, double max_velocity, int ID) {
-        super(model, price, consumption, max_velocity, ID);
+    public MiniVan(String model, double price, double consumption, double max_velocity, int ID, boolean b) {
+        super(model, price, consumption, max_velocity, ID, b);
         this.passengers = 8;
         this.driver_price = 10;
         this.fuel_price = 31.45;
