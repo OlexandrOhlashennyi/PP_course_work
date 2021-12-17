@@ -279,16 +279,49 @@ public class MainMenu extends Application implements EventHandler<ActionEvent> {
         }
         if (actionEvent.getSource() == delete_btn)
         {
+            if (TP.getType(Integer.parseInt(delete_id_txt.getText())).equals(""))
+            {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Wrong ID!");
+
+                alert.showAndWait();
+            }
+
             MenuCommand mc = menuItems.get("delete");
             mc.execute(Arrays.asList(delete_id_txt.getText()));
         }
         if (actionEvent.getSource() == order_btn)
         {
+            if (TP.getType(Integer.parseInt(delete_id_txt.getText())).equals(""))
+            {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Wrong ID!");
+
+                alert.showAndWait();
+            }
+
             MenuCommand mc = menuItems.get("order");
             mc.execute(Arrays.asList("order", delete_id_txt.getText()));
         }
         if (actionEvent.getSource() == unorder_btn)
         {
+            if (TP.getType(Integer.parseInt(delete_id_txt.getText())).equals(""))
+            {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Wrong ID!");
+
+                alert.showAndWait();
+            }
+            
             MenuCommand mc = menuItems.get("order");
             mc.execute(Arrays.asList("unorder", delete_id_txt.getText()));
         }
@@ -327,8 +360,20 @@ public class MainMenu extends Application implements EventHandler<ActionEvent> {
         if (actionEvent.getSource() == price_btn)
         {
             last_id = Integer.parseInt(delete_id_txt.getText());
-            main_stage.setScene(price_scene);
-            main_stage.show();
+
+            if (TP.getType(last_id).equals(""))
+            {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Wrong ID!");
+
+                alert.showAndWait();
+            } else {
+                main_stage.setScene(price_scene);
+                main_stage.show();
+            }
         }
         if (actionEvent.getSource() == calc_btn)
         {
