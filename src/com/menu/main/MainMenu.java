@@ -125,6 +125,12 @@ public class MainMenu extends Application implements EventHandler<ActionEvent> {
 
     private static TaxiPark TP;
 
+    private double toDouble(String s)
+    {
+        s = s.replaceAll(",", ".");
+        return Double.parseDouble(s);
+    }
+
     public MainMenu() {
         try {
             TP = new TaxiPark("TaxiPark1", "+380994130557", "taxipark1@taxi.com");
@@ -255,8 +261,8 @@ public class MainMenu extends Application implements EventHandler<ActionEvent> {
             MenuCommand mc = menuItems.get("show");
             try {
                 ResultSet rs;
-                double lower = Double.parseDouble(lower_te.getText());
-                double upper = Double.parseDouble(upper_te.getText());
+                double lower = toDouble(lower_te.getText());
+                double upper = toDouble(upper_te.getText());
                 if (speed_rbt.isSelected())
                     rs = mc.execute(Arrays.asList("speed", "" + lower, "" + upper));
                 else
@@ -297,7 +303,7 @@ public class MainMenu extends Application implements EventHandler<ActionEvent> {
             else
                 type = "sport";
 
-            mc.execute(Arrays.asList(type, add_model_txt.getText(), add_price_txt.getText(), add_cons_txt.getText(), add_ms_txt.getText()));
+            mc.execute(Arrays.asList(type, add_model_txt.getText(), "" + toDouble(add_price_txt.getText()), "" + toDouble(add_cons_txt.getText()), "" + toDouble(add_ms_txt.getText())));
 
             main_stage.setScene(main_scene);
             main_stage.show();
@@ -331,7 +337,7 @@ public class MainMenu extends Application implements EventHandler<ActionEvent> {
                 m = 2;
             if  (mode_ex_rb.isSelected())
                 m = 3;
-            car_price_txt.setText(String.format("%.2f", TP.cost(last_id, Double.parseDouble(length_txt.getText()), m)));
+            car_price_txt.setText(String.format("%.2f", TP.cost(last_id, toDouble(length_txt.getText()), m)));
         }
         if (actionEvent.getSource() == ch_mode_btn)
         {
